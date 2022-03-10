@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" name="" id="textinput">
+    <p id="key"></p>
+
+    <script>
+        //2) 키 이벤트 메소드 .keypress() .keydown()
+        // 키에서 사용할 수 있는 이벤트 타입 2가지
+
+//        $("#textinput").on("keypress", function(e){
+        $("#textinput, body").on("keydown", function(e){
+            $("#key").text(e.key); // which : 영어의 아스키코드 값이 나온다.
+                                  // key : 내가 입력한=누르는 키가 무엇인지 나온다.
+                                  //  키값으로 문자열을 들고온다.
+        });
+
+    </script>
+</body>
+</html>

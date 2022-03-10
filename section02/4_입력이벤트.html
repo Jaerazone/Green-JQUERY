@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="">
+        <input type="text" id="change">
+        <input type="text" id="select">
+    </form>
+    <p id="select_p"></p>
+
+    <!-- 3-1실습 -->
+    <h1>input의 focus와 blur에 따라 배경색이 달라집니다</h1>
+    <input type="text" id="focus">
+    
+    <script>
+        // 입력양식 이벤트 메소드
+        //3) .blur() .focus() .change() .select() .submit() 이벤트를 사용할 수 있다.
+        $("#change").on("change", function(){
+            $(this).css("color", "red");
+        });
+        // select : 글자를 드래그 했을때 나타난다.
+        $("#select").on("select", function(){
+            $("#select_p").append("선택되었습니다<br>");
+        });
+
+        //3-1)실습
+        $("#focus").on({
+            focus : function() {
+                $(this).css("background-color", "yellow");
+            },
+            blur : function() { // focus 반대 
+                $(this).css("background-color", "white");
+            }
+        });
+
+        //콘솔창
+        // let type = $("#focus") // focus 를 type변수로 불러옴
+        // $.type(type) //     타입이뭔가? object입니다.
+        // $.isEmptyObject(type) //    비어있는 오브젝트인가?(true or false) false입니다
+        // $.type("문자") -> string 문자라고 안내해줌
+        // $.type(1234) -> number 숫자라고 안내해줌
+    </script>
+</body>
+</html>

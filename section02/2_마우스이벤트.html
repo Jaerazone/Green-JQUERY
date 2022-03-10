@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button id="mouse"> 마우스 이벤트가 있는 버튼입니다</button>
+    
+    <script>
+        //1)마우스 이벤트 중첩사용
+        $("#mouse").on({//제이쿼리를 이용해 mouse를 들고와서 on객체로 확인한다.
+            //click, mouseenter 사용가능
+            dblclick : function() {//dblclick : 마우스 더블클릭했을때
+                $("body").append("마우스를 더블클릭했습니다<br>");
+            }, 
+            mouseleave : function() { //mouseleave : 마우스가 떠났을때
+                $("body").append("마우스가 버튼에서 떠났습니다<br>");
+            }
+        });
+    </script>
+</body>
+</html>
