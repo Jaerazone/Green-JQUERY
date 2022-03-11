@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        #div_box, #div_box2 { 
+            border : 3px solid orange;  background-color: yellow;
+            width: 100px;  height: 100px;  margin: 10px;
+        }
+        #div_box2 {
+            border : 3px solid orange; background-color: yellow;
+            width: 100px;  height: 100px;  margin: 10px;
+            position: fixed; top: 10px;  right: 10px;
+            box-shadow: 2px 2px black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1) 이펙트효과 (요소의 표시와 숨김) -->
+    <!-- 3가지 show() hide() toggle()  -->
+    <button id = "show_button"> 보이기</button>
+    <button id = "hide_button"> 숨기기</button>
+    <p id="text"> 글자가 보이고 숨겨집니다</p>
+
+    <!-- 1-1 요소의 표시와 숨김 실습 -->
+    <button id ="toggle_button"> 토글버튼</button>
+    <div id ="text_box"> 
+        <p> 이 요소는 div안의 p요소입니다 <br> 
+            toggle을 통해 효과를 주었습니다
+        </p>
+    </div>
+    <!-- 2)페이드 효과
+    해당요소 CSS opacity 속성값을 빠르게 변경하여 표현
+    .fadeIn() .fadeOut() .fadeToggle() -->
+        <button id="fadein">보이기</button>
+        <button id="fadeout">숨기기</button>
+
+        <p id ="fade_text"> 글자가 보여지고 숨겨집니다</p>
+    
+    <!-- 2-1 페이드 효과 실습 
+        헤더쪽에 style 태그를 이용해 div에 css 스타일주기
+    -->
+    <button id="fadebutton">버튼에 마우스를 올리면 상자가 나타나고 사라집니다</button>
+    <div id="div_box">
+        <button id="stopbutton">멈춤</button>
+    </div>
+
+    <!-- 3) 슬라이드 효과 -->
+    <button id="slideDown">보이기</button>
+    <button id="slideUp">숨기기</button>
+
+    <p id ="slide_text"> 글자가 보여지고 숨겨집니다</p>
+
+    <!-- 3-1 슬라이드 효과 실습 -->
+    <h1>고정된 div 나타내기</h1>
+    <button id="slideButton">슬라이드도 나타내기</button>
+    <div id="div_box2"></div>
+    <!-- 4)이펙트 효과의 제어
+    .delay() .stop() .finich(모든이펙트효과를 전부종료) -->
+
+
+
+    <script>
+        //1)이펙트효과
+        $("#show_button").on("click",function() {
+            $("#text").show("fast"); // show(4000);로 4초만에 효과나오게 or "slow" or "fast" 도 있다.
+        });
+        $("#hide_button").on("click",function() {
+            $("#text").hide();
+        });
+
+        //1-1)요소의 표시와 숨김 실습
+        $("#toggle_button").on("click",function() {
+            $("#text_box").toggle(1000); // toggle() : 효과를 줬다 ,안줬다 할수 있다.
+        });
+        $("#text_box").hide();
+        
+        //2) 페이드 효과
+        $("#fadein").on("click", function() {
+            $("#fade_text").fadeIn();
+        });
+        $("#fadeout").on("click", function() {
+            $("#fade_text").fadeOut();
+        });
+
+        //2-1) 페이드 효과 실습
+        $("#fadebutton").on({
+            mouseenter : function () {
+                $("#div_box").fadeIn();
+            },
+            mouseleave : function() {
+                $("#div_box").delay(1000).fadeOut(); // 4)이펙트효과 delay
+                $("#stopbutton").on("click", function() {
+                    $("#div_box").stop(); //4) 이펙트효과 stop
+                });
+            }
+        });
+        //4) 이펙트효과 delay, stop 윗줄
+        
+        
+        //3) 슬라이드 효과
+        $("#slideDown").on("click", function() {
+            $("#slide_text").slideDown();
+        });
+        $("#slideUp").on("click", function() {
+            $("#slide_text").slideUp();
+        });
+        
+        //3-1 슬라이드효과 실습
+        $("#slideButton").on("click", function() {
+            $("#div_box2").slideToggle();
+        });
+       
+
+    </script>
+</body>
+</html>
