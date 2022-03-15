@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>넌센스 Quiz 맞추기</h1>
+    <p>3문제 - 중복있음</p>
+    <h3><a href="" id="start">시작</a></h3>
+
+    <h3 id="quiz"></h3>
+    <!-- form을 사용하게 되면 submit 이벤트 사용가능 -->
+    <form id="input_form" style="display: none;">
+        <!-- JQuery의 show 또는 hide사용을 위해 display: none -->
+        <input type="text">
+    </form>
+    <p id="score"></p>
+
+    <script>
+        // 7) 사용되는 변수들을 한번에 정리해보기
+        let score = 0;
+        let count = 0; // 8) 문제를 몇번 풀었는지 확인하기 위해 선언
+        let randomnum = 0; // 13)문제를 랜덤으로 출력하기 위한 숫자(초기화)
+        const quizArray = [
+            { quiz: "왕이 넘어지면", answer:"킹콩" },
+            { quiz: "오리가 얼면", answer:"언덕" },
+            { quiz: "한국의 수도는", answer:"서울" },
+            { quiz: "5+9", answer:"14" },
+            { quiz: "5+10", answer:"15" }
+        ];
+
+        // 시작을 누르면 칸생성되야함 //
+        // 1) 버튼 클릭때 새로고침이 실행되지 않도록
+        // 2) 밑에 칸이 생성되고 천천히 열리게
+        // 3) 칸생성되면 포커스 잡아줘야함
+        // 4) 시작 버튼을 누르면 문제도 같이 출력된다
+        // 시작을 눌렀을때 입력칸 보이기
+        $("#start").on("click", function(e){
+            e.preventDefault(); // 1)
+            $("#input_form").hide().slideDown(); // 2)
+            $("#input_form").children().first().focus(); // 3) text 에 초점을 맞춰줌
+        
+            quizstart(); //$("#quiz").text("15+9"); // 4), 10)
+        });
+
+        // 5) 칸에 답입력 후 엔터치면 새로고침된다
+        // 6) submit 이벤트를 발생시 정답과 사용자가 입력한 input text값 비교
+        $("#input_form").on("submit", function(e){
+            e.preventDefault(); // 5)새로고침 막기
+            const answer = quizArray[randomnum].answer; // 12)랜덤퀴즈 정답을 변수로 선언
+            const $user = $("#input_form").children().first().val(); // text 입력값도 변수로 선언
+            //.prop("value")
+            count++; //8) 문제 횟수 증가, 3번 맞추면 종료되도록 설정하기
+            //6) if 문으로 정답과 text 입력값을 비교 후 답이 사용자와 같다면 점수 올림
+            if($user == answer){
+                score++; //7)score 값을 0으로 초기화 한 뒤 사용
+                $("#score").text( `3문제 중에서 ${score}점입니다.` ); //변수 사용할거라서 ``백틱으로 text 넣어줌
+                //정답을 맞췄을때만 출력되도록
+            }
+
+            //14) 퀴즈를 새로 내고, 입력값을 ""넣어줌
+            // 입력 후 점수와 입력값 숨김등은 다했고
+            // 마지막으로 퀴즈값만 실행되면됨.
+            quizstart(); //14)
+            //15) 엔터 친 이후에 값이 비워져야한다
+            $("#input_form").children().first().val(""); // 입력값을 ""비워줌
+
+             //9) count 가 3이면 input_form(입력창)숨기고 문제도 숨김
+             if(count == 3) {
+                $("#input_form").hide(); //9) 입력창 없애기
+                $("#quiz").text(""); //9) 문제 없애기
+                count = 0; //16) 총 3번맞췄을때 리셋시켜줘야한다
+                score = 0;
+            }
+            
+        });
+
+        //10) 퀴즈 만들기, 11)퀴즈를 const로 설정함
+        //12) answer 답으로 배열변수설정
+        // 13) 배열 길이로, 퀴즈문제 랜덤생성, 및 정수로 변환해주며, 이값을 변수로 설정함
+        function quizstart (){
+            randomnum = Math.floor(Math.random()*quizArray.length);  //13)
+            $("#quiz").text(quizArray[randomnum].quiz);
+        }
+        
+    </script>
+</body>
+</html>
